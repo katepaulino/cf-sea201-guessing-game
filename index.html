@@ -9,10 +9,18 @@
     <p>My name is Taylor.</p>
 
     <script type="text/javascript">
-      var usrName = prompt("Enter your name");
-      alert("Hi " + usrName);
+      var userName = prompt("Enter your name");
+      console.log("This is the userName var: " + userName);
 
-      console.log("This is the usrName var: " + usrName);
+      if (userName.toLowerCase() === "taylor") {
+        console.log("Type of userName: " + typeof userName);
+        console.log("The conidition is true.");
+      } else if (userName.toLowerCase() === "molly") {
+        console.log("The user entered " + userName);
+      } else {
+        console.log("User did not enter 'taylor' or 'molly'. Sad.");
+      }
+
     </script>
   </body>
 </html>
