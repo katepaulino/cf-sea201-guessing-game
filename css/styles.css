@@ -1,0 +1,28 @@
+html, body {
+  font-family: sans-serif;
+  color: rgb(51, 50, 51);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, l1, p {
+  padding: 5px;
+}
+
+h1, .sub-heading {
+  text-align: center;
+  color: rgb(245, 245, 245)
+}
+
+.header {
+  background-color: rgb(51, 50, 51);
+  width: 100%;
+  height: 100px;
+  top: 0;
+  position: absolute;
+}
+
+.push {
+  /*I found this on a fiddle, but can't remember where. Compensates for the header.*/
+  margin: 100px;
+}
