@@ -41,7 +41,7 @@ var onSubmitAnswer = function(event) {
     document.getElementById('userAnswer').value = ''; //clear the input field
   } else {
     //check the answer and show the 'next' button
-    game.currentQuestion.checkAnswer(answer);
+    displayOnPage('answer', game.currentQuestion.checkAnswer(answer));
     showNextButton();
   }
 };
@@ -60,12 +60,14 @@ var Question = function(question, answer, correctMsg, incorrectMsg) {
   this.incorrectMsg = incorrectMsg;
 };
 
+//refractor this out to only return the msg object.
+//let the other function call displayOnPage()
 Question.prototype.checkAnswer = function(userAnswer) {
   console.log('The answer is: ' + this.answer);
   if (answer.toLowerCase() === this.answer) {
-    displayOnPage('answer', this.correctMsg);
+    return this.correctMsg;
   } else {
-    displayOnPage('answer', this.incorrectMsg);
+    return this.incorrectMsg;
   }
 };
 
@@ -133,11 +135,11 @@ var generateQuestions = function() {
     console.log('The correctNum var is: ' + this.answer);
 
     if (parseInt(answer) === this.answer) {
-      displayOnPage('answer', this.correctMsg);
+      return this.correctMsg;
     } else if (parseInt(answer) > this.answer) {
-      displayOnPage('answer', 'Oops! Too high.');
+      return 'Oops! Too high.';
     } else {
-      displayOnPage('answer', 'Oops! Too low.');
+      return 'Oops! Too low.';
     }
   };
 
