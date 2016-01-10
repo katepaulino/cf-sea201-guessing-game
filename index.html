@@ -31,13 +31,14 @@
     </div>
 
     <script type="text/javascript">
-      // all of these if else statments seem very redundant.
-      // I'm thinking of refractoring to simplify.
-      //
+      var userName, answer = '';
+
+      //udpates page with text
       var displayOnPage = function(elmId,msg){
         document.getElementById(elmId).innerHTML = msg;
       };
 
+      //grabs the users answer and then checks value.
       var onSubmitAnswer = function(event){
         answer = document.getElementById('userAnswer').value;
 
@@ -45,8 +46,9 @@
         console.log("The answer from button submit " + answer);
       };
 
+      //questions all have the same, repetitive properties. Lets build an object.
       var Question = function(question, answer, correctMsg, incorrectMsg){
-        this.qusetion = question;
+        this.question = question;
         this.answer = answer;
         this.correctMsg = correctMsg;
         this.incorrectMsg = incorrectMsg;
@@ -73,51 +75,29 @@
         "I'm sorry " + userName + ", but I do indeed own a huge German Shepherd / Husky dog."
       );
 
+      var questions = [questionOne, questionTwo, questionThree];
+
+      //iterate over our questions, and gatehr responses.
+      for (var q in questions){
+        var question = questions[q]; //grab our question
+        console.log(question);
+
+        answer = prompt(question.question);
+        //answer check -- should be a function of the Question object?
+        if (answer.toLowerCase() === question.answer){
+          if (answer.toLowerCase() === 'yes') {
+            displayOnPage('answer', question.correctMsg);
+          } else {
+            displayOnPage('answer', question.incorrectMsg);
+          }
+        }
+      }
+
       // ask for the users name
-      var userName = prompt("Enter your name");
+      userName = prompt("Enter your name");
       displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
 
       console.log("This is the userName var: " + userName);
-
-      //lets start the game
-      var answer = prompt("Did I grow up in the Seattle area?");
-      displayOnPage('question', "Did I grow up in the Seattle area?");
-
-      console.log("My Question: Did I grow up in Seattle?");
-      console.log("The user answered: " + answer);
-
-      //check answer
-      if (answer.toLowerCase() === 'yes') {
-        displayOnPage('answer', "Good Job, " + userName + "! I did grow up in the area.");
-      } else {
-        displayOnPage('answer', "I'm sorry " + userName + ", but I did indeed grow up in the area.");
-      }
-
-      //question two
-      answer = prompt("Have I ever visited Africa?");
-      displayOnPage('question', "Have I ever visited Africa?");
-
-      console.log("My Question: Have I ever visited Africa?");
-      console.log("The user answered: " + answer);
-
-      if (answer.toLowerCase() === 'no') {
-        displayOnPage('answer', "Good Job, " + userName + "! I have never visited Africa." );
-      } else {
-        displayOnPage('answer', "I'm sorry " + userName + ", but I've never visited Africa." );
-      }
-
-      //question three
-      answer = prompt("Do I own an 80lb German Shepherd / Husky dog?");
-      displayOnPage('question', "Do I own an 80lb German Shepherd / Husky dog?");
-
-      console.log("My Question: Do I own an 80lb dog?");
-      console.log("The user answered: " + answer);
-
-      if (answer.toLowerCase() === 'yes') {
-        displayOnPage('answer', "Good Job, " + userName + "! I do have a huge German Shepherd / Husky dog.");
-      } else {
-        displayOnPage('answer', "I'm sorry " + userName + ", but I do indeed own a huge German Shepherd / Husky dog.");
-      }
 
       //lets ask them to quess a number between 1 and 10
       var min = 1;
