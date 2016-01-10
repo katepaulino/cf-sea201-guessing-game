@@ -25,11 +25,24 @@
       //lets start the game
       var answer = prompt("Did I grow up in Seattle area?");
       if (answer.toLowerCase() === 'yes') {
-        alert("Good Job " + userName + "! I did grow up in the area.");
+        alert("Good Job, " + userName + "! I did grow up in the area.");
       } else {
         alert("I'm sorry " + userName + ", but I did indeed grow up in the area.");
       }
 
+      answer = prompt("Have I ever visited Africa?");
+      if (answer.toLowerCase() === 'no') {
+        alert("Good Job, " + userName + "! I have never visited Africa.");
+      } else {
+        alert("I'm sorry " + userName + ", but I've never visited Africa.");
+      }
+
+      answer = prompt("Do I own an 80lb German Shepherd / Husky dog?");
+      if (answer.toLowerCase() === 'yes') {
+        alert("Good Job, " + userName + "! I do have an huge German Shepherd / Husky dog.");
+      } else {
+        alert("I'm sorry " + userName + ", but I do indeed own a hugh German Shepherd / Husky dog.");
+      }
 
     </script>
   </body>
