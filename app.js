@@ -47,7 +47,7 @@ var onSubmitAnswer = function(event) {
 };
 
 var displayNextQuestion = function(event) {
-  game.nextQuestion(); //show next question
+  displayOnPage('question', game.nextQuestion()); //show next question
   game.clearAnswer(); //clear previous answer
   showSubmitButton(); //unhide the submit button
 };
@@ -71,10 +71,6 @@ Question.prototype.checkAnswer = function(userAnswer) {
   }
 };
 
-Question.prototype.displayQuestion = function() {
-  displayOnPage('question', this.question);
-};
-
 //lets make a Game
 var Game = function(questions) {
   this.questions = questions;
@@ -87,9 +83,9 @@ Game.prototype.nextQuestion = function() {
   if (this.questionIdx < this.questionLength - 1) {
     this.questionIdx++;
     this.currentQuestion = this.questions[this.questionIdx];
-    this.currentQuestion.displayQuestion();
+    return this.currentQuestion.question;
   } else {
-    displayOnPage('question', "Nice work, you're finished.");
+    return "Nice work, you're finished.";
   }
 };
 
@@ -167,7 +163,7 @@ var showNameQuestion = function() {
 
 var initGame = function() {
   //starts the game.
-  game.currentQuestion.displayQuestion();
+  displayOnPage('question', game.currentQuestion.question);
 };
 
 var getName = function(name) {
