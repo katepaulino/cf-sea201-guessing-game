@@ -60,6 +60,14 @@
         this.incorrectMsg = incorrectMsg;
       };
 
+      Question.prototype.checkAnswer = function(userAnswer){
+        if (answer.toLowerCase() === question.answer){
+            displayOnPage('answer', question.correctMsg);
+          } else {
+            displayOnPage('answer', question.incorrectMsg);
+          }
+        };
+
       var questionOne = new Question(
         "Did I grow up in the Seattle area?",
         "yes",
@@ -89,18 +97,16 @@
         console.log(question);
 
         answer = prompt(question.question);
-        //answer check -- should be a function of the Question object?
-        if (answer.toLowerCase() === question.answer){
-            displayOnPage('answer', question.correctMsg);
-          } else {
-            displayOnPage('answer', question.incorrectMsg);
-          }
-        }
+        question.checkAnswer(answer);
+
+      }
 
       //lets ask them to quess a number between 1 and 10
       var min = 1;
       var max = 10;
       correctNum = Math.floor(Math.random() * (max - min)) + min; //took this from MDN
+      displayOnPage('answer', ""); //lets clear the answer field
+
 
       answer = prompt("Try to guess the number. It is between 1 and 10.");
       displayOnPage('question', "Try to guess the number. It is between 1 and 10.");
