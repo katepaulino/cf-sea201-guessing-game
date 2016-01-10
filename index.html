@@ -51,9 +51,10 @@
         build our questions and then start the game.
         I'm not sure if this is the bet way. It feels really sloppy.
         */
-       
+
         if (userName === undefined) {
           getName(answer);
+          nameQuestion.checkAnswer(answer);
           document.getElementById('userAnswer').value = ""; //clear the input field
         } else {
           game.currentQuestion.checkAnswer(answer);
@@ -187,7 +188,7 @@
       nameQuestion.checkAnswer = function(answer) {
         // we just want to display the name
         console.log("The user's name is: " + answer);
-        displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
+        displayOnPage('userName', "Hi " + answer + ". Let's play a game.");
       };
 
 
