@@ -46,15 +46,26 @@
         console.log("The answer from button submit " + answer);
 
         game.currentQuestion.checkAnswer(answer);
-        document.getElementById('nextQuestionButton').style.display = "inline-block";
-        document.getElementById('userSubmitButton').style.display = "none";
+        showNextButton();
       };
 
       var displayNextQuestion = function(event){
         game.nextQuestion(); //show next question
         game.clearAnswer(); //clear previous answer
+        showSubmitButton();
+      };
+
+      var showSubmitButton = function() {
         document.getElementById('userSubmitButton').style.display = "inline-block";
+        document.getElementById('userAnswer').style.display= "inline-block";
         document.getElementById('nextQuestionButton').style.display = "none";
+      };
+
+      var showNextButton = function() {
+        document.getElementById('nextQuestionButton').style.display = "inline-block";
+        document.getElementById('userSubmitButton').style.display = "none";
+        document.getElementById('userAnswer').value = ""; //clear the input field
+        document.getElementById('userAnswer').style.display = "none";
       };
 
       // ask for the users name
