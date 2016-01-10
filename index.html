@@ -26,7 +26,8 @@
     <div>
       <form action="" id="userAnswerForm">
         <input type="text" name="userAnswer" id="userAnswer" placeholder="Put Your Answer Here">
-        <input type="button" id="userSubmitButto" onclick = "onSubmitAnswer()" value="Submit Answer">
+        <input type="button" id="userSubmitButton" onclick = "onSubmitAnswer()" value="Submit Answer">
+        <input type="button" id="nextQuestionButton" onclick = "displayNextQuestion()" value="Next Question" style="visibility:hidden">
       </form>
     </div>
 
@@ -47,7 +48,15 @@
         console.log("The answer from button submit " + answer);
 
         game.currentQuestion.checkAnswer(answer);
-        game.nextQuestion();
+        document.getElementById('nextQuestionButton').style.visibility = "visible";
+        document.getElementById('userSubmitButton').style.visibility = "hidden";
+      };
+
+      var displayNextQuestion = function(event){
+        game.nextQuestion(); //show next question
+        game.clearAnswer(); //clear previous answer
+        document.getElementById('userSubmitButton').style.visibility = "visible";
+        document.getElementById('nextQuestionButton').style.visibility = "hidden";
       };
 
       // ask for the users name
@@ -90,6 +99,10 @@
         this.currentQuestion.displayQuestion();
       };
 
+      Game.prototype.clearAnswer = function () {
+        displayOnPage('answer', "");
+      };
+
       var questionOne = new Question(
         "Did I grow up in the Seattle area?",
         "yes",
@@ -114,21 +127,12 @@
       var questions = [questionOne, questionTwo, questionThree];
       var game = new Game(questions);
 
-      //iterate over our questions, and gatehr responses.
-      // for (var q in questions){
-      //   var question = questions[q]; //grab our question
-      //   console.log(question);
-      //
-      //   answer = prompt(question.question);
-      //   question.checkAnswer(answer);
-      //
-      // }
-
-      var playGame = function(){
+      var initGame = function(){
+        //starts the game.
         game.currentQuestion.displayQuestion();
       };
 
-      playGame();
+      initGame();
 
       //lets ask them to quess a number between 1 and 10
       // var min = 1;
