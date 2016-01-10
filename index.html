@@ -14,7 +14,6 @@
       <!-- this is empty to compensate for the header -->
     </div>
 
-
     <script type="text/javascript">
       // ask for the users name
       var userName = prompt("Enter your name");
@@ -24,6 +23,10 @@
 
       //lets start the game
       var answer = prompt("Did I grow up in Seattle area?");
+      console.log("My Question: Did I grow up in Seattle?");
+      console.log("The user answered: " + answer);
+
+      //check answer
       if (answer.toLowerCase() === 'yes') {
         alert("Good Job, " + userName + "! I did grow up in the area.");
       } else {
@@ -31,6 +34,9 @@
       }
 
       answer = prompt("Have I ever visited Africa?");
+      console.log("My Question: Have I ever visited Africa?");
+      console.log("The user answered: " + answer);
+
       if (answer.toLowerCase() === 'no') {
         alert("Good Job, " + userName + "! I have never visited Africa.");
       } else {
@@ -38,6 +44,9 @@
       }
 
       answer = prompt("Do I own an 80lb German Shepherd / Husky dog?");
+      console.log("My Question: Do I own an 80lb dog?");
+      console.log("The user answered: " + answer);
+
       if (answer.toLowerCase() === 'yes') {
         alert("Good Job, " + userName + "! I do have a huge German Shepherd / Husky dog.");
       } else {
