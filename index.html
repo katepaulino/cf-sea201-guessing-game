@@ -111,7 +111,6 @@
         } else {
           displayOnPage('question', "Nice work, you're finished.");
         }
-
       };
 
       Game.prototype.clearAnswer = function () {
@@ -143,14 +142,14 @@
         "Try to guess the number. It is between 1 and 10.",
         Math.floor(Math.random() * (10 - 1)) + 1, //took this from MDN
         "Good Job, " + userName + "! You got it right!",
-        ""
+        "" // we will use our new CheckAnswer() to generate this...
       );
 
       questionFour.checkAnswer = function(answer) {
         // questionFour needs a new checkAnswer function to account for the
         // answer being too high or too low
         console.log("The correctNum var is: " + this.answer);
-        
+
         if (parseInt(answer) === this.answer) {
           displayOnPage('answer', this.correctMsg);
         } else if (parseInt(answer) > this.answer) {
@@ -160,8 +159,7 @@
         }
       };
 
-      //var questions = [questionOne, questionTwo, questionThree, questionFour];
-      var questions = [questionFour];
+      var questions = [questionOne, questionTwo, questionThree, questionFour];
       var game = new Game(questions);
 
       var initGame = function(){
@@ -169,29 +167,11 @@
         game.currentQuestion.displayQuestion();
       };
 
+      var getUserName = function() {
+        //lets show the user name form, and then hide it once we are done
+      };
+
       initGame();
-
-      //lets ask them to quess a number between 1 and 10
-      // var min = 1;
-      // var max = 10;
-      // correctNum = Math.floor(Math.random() * (max - min)) + min; //took this from MDN
-      // displayOnPage('answer', ""); //lets clear the answer field
-      //
-      // answer = prompt("Try to guess the number. It is between 1 and 10.");
-      // displayOnPage('question', "Try to guess the number. It is between 1 and 10.");
-      //
-      // console.log("The correct number is:" + correctNum);
-      // console.log("The user guessed: " + answer);
-      //
-      // if (parseInt(answer) === correctNum) {
-      //   displayOnPage('answer', "Good Job, " + userName + "! You got it right!");
-      // } else if (parseInt(answer) > correctNum) {
-      //   displayOnPage('answer', "Oops! Too high.");
-      // } else {
-      //   // must be too low
-      //   displayOnPage('ansewr', "Oops! Too low.");
-      // }
-
     </script>
   </body>
 </html>
