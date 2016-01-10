@@ -45,6 +45,9 @@
 
         console.log("onSubmitAnswer -- fired OK");
         console.log("The answer from button submit " + answer);
+
+        game.currentQuestion.checkAnswer(answer);
+        game.nextQuestion();
       };
 
       // ask for the users name
@@ -62,10 +65,10 @@
       };
 
       Question.prototype.checkAnswer = function(userAnswer){
-        if (answer.toLowerCase() === question.answer){
-            displayOnPage('answer', question.correctMsg);
+        if (answer.toLowerCase() === this.answer){
+            displayOnPage('answer', this.correctMsg);
           } else {
-            displayOnPage('answer', question.incorrectMsg);
+            displayOnPage('answer', this.incorrectMsg);
           }
         };
 
@@ -76,8 +79,15 @@
       //lets make a Game
       var Game = function(questions) {
         this.questions = questions;
+        this.questionIdx = 0;
         this.currentQuestion = questions[0];
         this.questionLength = questions.length;
+      };
+
+      Game.prototype.nextQuestion = function () {
+        this.questionIdx++;
+        this.currentQuestion = this.questions[this.questionIdx];
+        this.currentQuestion.displayQuestion();
       };
 
       var questionOne = new Question(
@@ -102,38 +112,44 @@
       );
 
       var questions = [questionOne, questionTwo, questionThree];
+      var game = new Game(questions);
 
       //iterate over our questions, and gatehr responses.
-      for (var q in questions){
-        var question = questions[q]; //grab our question
-        console.log(question);
+      // for (var q in questions){
+      //   var question = questions[q]; //grab our question
+      //   console.log(question);
+      //
+      //   answer = prompt(question.question);
+      //   question.checkAnswer(answer);
+      //
+      // }
 
-        answer = prompt(question.question);
-        question.checkAnswer(answer);
+      var playGame = function(){
+        game.currentQuestion.displayQuestion();
+      };
 
-      }
-
+      playGame();
 
       //lets ask them to quess a number between 1 and 10
-      var min = 1;
-      var max = 10;
-      correctNum = Math.floor(Math.random() * (max - min)) + min; //took this from MDN
-      displayOnPage('answer', ""); //lets clear the answer field
-
-      answer = prompt("Try to guess the number. It is between 1 and 10.");
-      displayOnPage('question', "Try to guess the number. It is between 1 and 10.");
-
-      console.log("The correct number is:" + correctNum);
-      console.log("The user guessed: " + answer);
-
-      if (parseInt(answer) === correctNum) {
-        displayOnPage('answer', "Good Job, " + userName + "! You got it right!");
-      } else if (parseInt(answer) > correctNum) {
-        displayOnPage('answer', "Oops! Too high.");
-      } else {
-        // must be too low
-        displayOnPage('ansewr', "Oops! Too low.");
-      }
+      // var min = 1;
+      // var max = 10;
+      // correctNum = Math.floor(Math.random() * (max - min)) + min; //took this from MDN
+      // displayOnPage('answer', ""); //lets clear the answer field
+      //
+      // answer = prompt("Try to guess the number. It is between 1 and 10.");
+      // displayOnPage('question', "Try to guess the number. It is between 1 and 10.");
+      //
+      // console.log("The correct number is:" + correctNum);
+      // console.log("The user guessed: " + answer);
+      //
+      // if (parseInt(answer) === correctNum) {
+      //   displayOnPage('answer', "Good Job, " + userName + "! You got it right!");
+      // } else if (parseInt(answer) > correctNum) {
+      //   displayOnPage('answer', "Oops! Too high.");
+      // } else {
+      //   // must be too low
+      //   displayOnPage('ansewr', "Oops! Too low.");
+      // }
 
     </script>
   </body>
