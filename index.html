@@ -24,10 +24,10 @@
     </div>
 
     <div>
-      <form action="" id="userAnswerForm">
-        <input type="text" name="userAnswer" id="userAnswer" placeholder="Put Your Answer Here">
-        <input type="button" id="userSubmitButton" onclick = "onSubmitAnswer()" value="Submit Answer">
-        <input type="button" id="nextQuestionButton" onclick = "displayNextQuestion()" value="Next Question" style="visibility:hidden">
+      <form action="" id="userAnswerForm" class="form-field">
+        <input type="text" class="txt-field-style" name="userAnswer" id="userAnswer" placeholder="Put Your Answer Here"><br />
+        <input type="button" class="btn-style" id="userSubmitButton" onclick = "onSubmitAnswer()" value="Submit Answer">
+        <input type="button" class="btn-style" id="nextQuestionButton" onclick = "displayNextQuestion()" value="Next Question" style="display:none">
       </form>
     </div>
 
@@ -43,20 +43,18 @@
       //grabs the users answer and then checks value.
       var onSubmitAnswer = function(event){
         answer = document.getElementById('userAnswer').value;
-
-        console.log("onSubmitAnswer -- fired OK");
         console.log("The answer from button submit " + answer);
 
         game.currentQuestion.checkAnswer(answer);
-        document.getElementById('nextQuestionButton').style.visibility = "visible";
-        document.getElementById('userSubmitButton').style.visibility = "hidden";
+        document.getElementById('nextQuestionButton').style.display = "inline-block";
+        document.getElementById('userSubmitButton').style.display = "none";
       };
 
       var displayNextQuestion = function(event){
         game.nextQuestion(); //show next question
         game.clearAnswer(); //clear previous answer
-        document.getElementById('userSubmitButton').style.visibility = "visible";
-        document.getElementById('nextQuestionButton').style.visibility = "hidden";
+        document.getElementById('userSubmitButton').style.display = "inline-block";
+        document.getElementById('nextQuestionButton').style.display = "none";
       };
 
       // ask for the users name
@@ -94,9 +92,14 @@
       };
 
       Game.prototype.nextQuestion = function () {
-        this.questionIdx++;
-        this.currentQuestion = this.questions[this.questionIdx];
-        this.currentQuestion.displayQuestion();
+        if (this.questionIdx < this.questionLength - 1){
+          this.questionIdx++;
+          this.currentQuestion = this.questions[this.questionIdx];
+          this.currentQuestion.displayQuestion();
+        } else {
+          displayOnPage('question', "YOU FINISHED!!")
+        }
+
       };
 
       Game.prototype.clearAnswer = function () {

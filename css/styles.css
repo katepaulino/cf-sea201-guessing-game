@@ -10,8 +10,34 @@ h1, h2, l1, p {
   text-align: center;
 }
 
-input {
-  margin: atuo
+.form-field {
+  text-align: center;
+  display: block;
+  margin: atuo;
+}
+
+.btn-style{
+	border : solid 1px rgb(51, 51, 51);
+	border-radius : 3px;
+	color : #292929;
+	padding : 1px 20px;
+  font-size: 14pt;
+	background-color : #ffffff;
+  width: 15%;
+  height: 50px;
+
+}
+
+.txt-field-style {
+  border: solid 1px rgb(51, 51, 51);
+  border-radius: 3px;
+  color: #282828;
+  padding: 1px 20px;
+  font-size: 12pt;
+  width: 15%;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
 }
 
 .sub-heading {
