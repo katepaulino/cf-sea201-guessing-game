@@ -45,6 +45,34 @@
         console.log("The answer from button submit " + answer);
       };
 
+      var Question = function(question, answer, correctMsg, incorrectMsg){
+        this.qusetion = question;
+        this.answer = answer;
+        this.correctMsg = correctMsg;
+        this.incorrectMsg = incorrectMsg;
+      };
+
+      var questionOne = new Question(
+        "Did I grow up in the Seattle area?",
+        "yes",
+        "Good Job, " + userName + "! I did grow up in the area.",
+        "I'm sorry " + userName + ", but I did indeed grow up in the area."
+      );
+
+      var questionTwo = new Question(
+        "Have I ever visited Africa?",
+        "no",
+        "Good Job, " + userName + "! I have never visited Africa.",
+        "I'm sorry " + userName + ", but I did indeed grow up in the area."
+      );
+
+      var questionThree = new Question(
+        "Do I own an 80lb German Shepherd / Husky dog?",
+        "yes",
+        "Good Job, " + userName + "! I do have a huge German Shepherd / Husky dog.",
+        "I'm sorry " + userName + ", but I do indeed own a huge German Shepherd / Husky dog."
+      );
+
       // ask for the users name
       var userName = prompt("Enter your name");
       displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
