@@ -5,7 +5,7 @@ html, body {
   padding: 0;
 }
 
-h1, h2, l1, p {
+h1, h2, l1, p, input {
   padding: 5px;
   text-align: center;
 }

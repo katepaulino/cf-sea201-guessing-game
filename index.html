@@ -65,7 +65,7 @@
         "Have I ever visited Africa?",
         "no",
         "Good Job, " + userName + "! I have never visited Africa.",
-        "I'm sorry " + userName + ", but I did indeed grow up in the area."
+        "I'm sorry " + userName + ", but I have never been to Africa."
       );
 
       var questionThree = new Question(
@@ -76,6 +76,12 @@
       );
 
       var questions = [questionOne, questionTwo, questionThree];
+
+      // ask for the users name
+      userName = prompt("Enter your name");
+      displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
+
+      console.log("This is the userName var: " + userName);
 
       //iterate over our questions, and gatehr responses.
       for (var q in questions){
@@ -92,12 +98,6 @@
           }
         }
       }
-
-      // ask for the users name
-      userName = prompt("Enter your name");
-      displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
-
-      console.log("This is the userName var: " + userName);
 
       //lets ask them to quess a number between 1 and 10
       var min = 1;
