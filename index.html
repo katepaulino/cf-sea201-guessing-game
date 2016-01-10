@@ -45,6 +45,7 @@
         answer = document.getElementById('userAnswer').value;
         console.log("The answer from button submit " + answer);
 
+        userName = userName || answer; // assign the user name if it is undefined.
         game.currentQuestion.checkAnswer(answer);
         showNextButton();
       };
@@ -69,8 +70,8 @@
       };
 
       // ask for the users name
-      userName = prompt("Enter your name");
-      displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
+      // userName = prompt("Enter your name");
+      // displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
 
       console.log("This is the userName var: " + userName);
 
@@ -139,14 +140,18 @@
       );
 
       var questionFour = new Question(
+        // this is a tricky one
         "Try to guess the number. It is between 1 and 10.",
         Math.floor(Math.random() * (10 - 1)) + 1, //took this from MDN
         "Good Job, " + userName + "! You got it right!",
         "" // we will use our new CheckAnswer() to generate this...
       );
 
+      // These next two 'questions' have been really bastardized. We need custom
+      // checkAnswer() so we overrite the prototype.
+
       questionFour.checkAnswer = function(answer) {
-        // questionFour needs a new checkAnswer function to account for the
+        // questionFour needs a new checkAnswer() to account for the
         // answer being too high or too low
         console.log("The correctNum var is: " + this.answer);
 
@@ -159,16 +164,25 @@
         }
       };
 
-      var questions = [questionOne, questionTwo, questionThree, questionFour];
+      var nameQuestion = new Question(
+        "What is your name?",
+        true,
+        "Hi " + userName + ". Let's play a game.",
+        "" // there is no incorrect answer
+      );
+
+      nameQuestion.checkAnswer = function(answer) {
+        // we just want to display the name
+        console.log("The user's name is: " + answer);
+        displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
+      };
+
+      var questions = [nameQuestion, questionOne, questionTwo, questionThree, questionFour];
       var game = new Game(questions);
 
       var initGame = function(){
         //starts the game.
         game.currentQuestion.displayQuestion();
-      };
-
-      var getUserName = function() {
-        //lets show the user name form, and then hide it once we are done
       };
 
       initGame();
