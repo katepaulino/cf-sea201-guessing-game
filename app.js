@@ -37,7 +37,7 @@ var onSubmitAnswer = function(event) {
   if (userName === undefined) {
     //we are just starting. Lets set our user name and build our questions.
     getName(answer);
-    nameQuestion.checkAnswer(answer);
+    displayOnPage('userName', nameQuestion.checkAnswer(answer));
     document.getElementById('userAnswer').value = ''; //clear the input field
   } else {
     //check the answer and show the 'next' button
@@ -157,7 +157,7 @@ var nameQuestion = new Question(
 //no validation, just show the user's input.
 nameQuestion.checkAnswer = function(answer) {
   console.log("The user's name is: " + answer);
-  displayOnPage('userName', 'Hi ' + answer + ". Let's play a game.");
+  return 'Hi ' + answer + ". Let's play a game.";
 };
 
 var showNameQuestion = function() {
