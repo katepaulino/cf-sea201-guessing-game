@@ -46,6 +46,12 @@
         console.log("The answer from button submit " + answer);
       };
 
+      // ask for the users name
+      userName = prompt("Enter your name");
+      displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
+
+      console.log("This is the userName var: " + userName);
+
       //questions all have the same, repetitive properties. Lets build an object.
       var Question = function(question, answer, correctMsg, incorrectMsg){
         this.question = question;
@@ -77,12 +83,6 @@
 
       var questions = [questionOne, questionTwo, questionThree];
 
-      // ask for the users name
-      userName = prompt("Enter your name");
-      displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
-
-      console.log("This is the userName var: " + userName);
-
       //iterate over our questions, and gatehr responses.
       for (var q in questions){
         var question = questions[q]; //grab our question
@@ -91,13 +91,11 @@
         answer = prompt(question.question);
         //answer check -- should be a function of the Question object?
         if (answer.toLowerCase() === question.answer){
-          if (answer.toLowerCase() === 'yes') {
             displayOnPage('answer', question.correctMsg);
           } else {
             displayOnPage('answer', question.incorrectMsg);
           }
         }
-      }
 
       //lets ask them to quess a number between 1 and 10
       var min = 1;

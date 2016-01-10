@@ -5,9 +5,13 @@ html, body {
   padding: 0;
 }
 
-h1, h2, l1, p, input {
+h1, h2, l1, p {
   padding: 5px;
   text-align: center;
+}
+
+input {
+  margin: atuo
 }
 
 .sub-heading {
