@@ -9,6 +9,19 @@ var displayOnPage = function(elmId, msg) {
   document.getElementById(elmId).innerHTML = msg;
 };
 
+var showSubmitButton = function() {
+  document.getElementById('userSubmitButton').style.display = 'inline-block';
+  document.getElementById('userAnswer').style.display = 'inline-block';
+  document.getElementById('nextQuestionButton').style.display = 'none';
+};
+
+var showNextButton = function() {
+  document.getElementById('nextQuestionButton').style.display = 'inline-block';
+  document.getElementById('userSubmitButton').style.display = 'none';
+  document.getElementById('userAnswer').value = ''; //clear the input field
+  document.getElementById('userAnswer').style.display = 'none';
+};
+
 //grabs the users answer and then checks value.
 var onSubmitAnswer = function(event) {
   answer = document.getElementById('userAnswer').value;
@@ -25,7 +38,6 @@ var onSubmitAnswer = function(event) {
     //we are just starting. Lets set our user name and build our questions.
     getName(answer);
     nameQuestion.checkAnswer(answer);
-
     document.getElementById('userAnswer').value = ''; //clear the input field
   } else {
     //check the answer and show the 'next' button
@@ -37,20 +49,7 @@ var onSubmitAnswer = function(event) {
 var displayNextQuestion = function(event) {
   game.nextQuestion(); //show next question
   game.clearAnswer(); //clear previous answer
-  showSubmitButton();
-};
-
-var showSubmitButton = function() {
-  document.getElementById('userSubmitButton').style.display = 'inline-block';
-  document.getElementById('userAnswer').style.display = 'inline-block';
-  document.getElementById('nextQuestionButton').style.display = 'none';
-};
-
-var showNextButton = function() {
-  document.getElementById('nextQuestionButton').style.display = 'inline-block';
-  document.getElementById('userSubmitButton').style.display = 'none';
-  document.getElementById('userAnswer').value = ''; //clear the input field
-  document.getElementById('userAnswer').style.display = 'none';
+  showSubmitButton(); //unhide the submit button
 };
 
 //questions all have the same, repetitive properties. Lets build an object.
@@ -131,8 +130,6 @@ var generateQuestions = function() {
   // This question is really bastardized. We need custom
   // checkAnswer() so we overrite the prototype.
   questionFour.checkAnswer = function(answer) {
-    // questionFour needs a new checkAnswer() to account for the
-    // answer being too high or too low
     console.log('The correctNum var is: ' + this.answer);
 
     if (parseInt(answer) === this.answer) {
