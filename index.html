@@ -16,9 +16,21 @@
 
 
     <script type="text/javascript">
+      // ask for the users name
       var userName = prompt("Enter your name");
       console.log("This is the userName var: " + userName);
-      
+
+      alert("Hi " + userName + "! Nice to meet you.");
+
+      //lets start the game
+      var answer = prompt("Did I grow up in Seattle area?");
+      if (answer.toLowerCase() === 'yes') {
+        alert("Good Job " + userName + "! I did grow up in the area.");
+      } else {
+        alert("I'm sorry " + userName + ", but I did indeed grow up in the area.");
+      }
+
+
     </script>
   </body>
 </html>
