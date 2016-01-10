@@ -45,7 +45,6 @@
         answer = document.getElementById('userAnswer').value;
         console.log("The answer from button submit " + answer);
 
-        userName = userName || answer; // assign the user name if it is undefined.
         game.currentQuestion.checkAnswer(answer);
         showNextButton();
       };
@@ -70,8 +69,8 @@
       };
 
       // ask for the users name
-      // userName = prompt("Enter your name");
-      // displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
+      userName = prompt("Enter your name");
+      displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
 
       console.log("This is the userName var: " + userName);
 
