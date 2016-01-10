@@ -7,20 +7,35 @@
   </head>
   <body>
     <div class="header">
-      <h1>Taylor's Guessing Game</h1>
+      <h1 class="sub-heading">Taylor's Guessing Game</h1>
     </div>
 
     <div class="push">
       <!-- this is empty to compensate for the header -->
     </div>
 
+    <div>
+      <h1 class="" id="userName"></h1>
+    </div>
+
+    <div>
+      <h1 class="" id="question"> </h1>
+      <h2 class="" id="answer"> </h2>
+
+    </div>
+
     <script type="text/javascript">
       // all of these if else statments seem very redundant.
       // I'm thinking of refractoring to simplify.
 
+      var displayOnPage = function(elmId,msg){
+        document.getElementById(elmId).innerHTML = msg;
+      };
+
       // ask for the users name
       var userName = prompt("Enter your name");
       console.log("This is the userName var: " + userName);
+      displayOnPage('userName', userName)
 
       alert("Hi " + userName + "! Nice to meet you.");
 

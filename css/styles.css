@@ -7,9 +7,10 @@ html, body {
 
 h1, h2, l1, p {
   padding: 5px;
+  text-align: center;
 }
 
-h1, .sub-heading {
+.sub-heading {
   text-align: center;
   color: rgb(245, 245, 245)
 }
