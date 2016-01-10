@@ -83,6 +83,7 @@
       };
 
       Question.prototype.checkAnswer = function(userAnswer){
+        console.log("The answer is: " + this.answer);
         if (answer.toLowerCase() === this.answer){
             displayOnPage('answer', this.correctMsg);
           } else {
@@ -108,7 +109,7 @@
           this.currentQuestion = this.questions[this.questionIdx];
           this.currentQuestion.displayQuestion();
         } else {
-          displayOnPage('question', "YOU FINISHED!!")
+          displayOnPage('question', "Nice work, you're finished.");
         }
 
       };
@@ -138,7 +139,29 @@
         "I'm sorry " + userName + ", but I do indeed own a huge German Shepherd / Husky dog."
       );
 
-      var questions = [questionOne, questionTwo, questionThree];
+      var questionFour = new Question(
+        "Try to guess the number. It is between 1 and 10.",
+        Math.floor(Math.random() * (10 - 1)) + 1, //took this from MDN
+        "Good Job, " + userName + "! You got it right!",
+        ""
+      );
+
+      questionFour.checkAnswer = function(answer) {
+        // questionFour needs a new checkAnswer function to account for the
+        // answer being too high or too low
+        console.log("The correctNum var is: " + this.answer);
+        
+        if (parseInt(answer) === this.answer) {
+          displayOnPage('answer', this.correctMsg);
+        } else if (parseInt(answer) > this.answer) {
+          displayOnPage('answer', "Oops! Too high.");
+        } else {
+          displayOnPage('answer', "Oops! Too low.");
+        }
+      };
+
+      //var questions = [questionOne, questionTwo, questionThree, questionFour];
+      var questions = [questionFour];
       var game = new Game(questions);
 
       var initGame = function(){
