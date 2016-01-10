@@ -21,7 +21,13 @@
     <div>
       <h1 class="" id="question"> </h1>
       <h2 class="" id="answer"> </h2>
+    </div>
 
+    <div>
+      <form action="" id="userAnswer">
+        <input type="text" name="userAnswer" placeholder="Put Your Answer Here">
+        <input type="button" onclick = "onSubmitAnswer()" value="Submit Answer">
+      </form>
     </div>
 
     <script type="text/javascript">
@@ -32,9 +38,14 @@
         document.getElementById(elmId).innerHTML = msg;
       };
 
+      var onSubmitAnswer = function(event){
+        console.log("onSubmitAnswer -- fired OK");
+      };
+
       // ask for the users name
       var userName = prompt("Enter your name");
       displayOnPage('userName', "Hi " + userName + ". Let's play a game.");
+
       console.log("This is the userName var: " + userName);
 
       //lets start the game
