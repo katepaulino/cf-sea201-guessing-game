@@ -124,7 +124,7 @@ var generateQuestions = function() {
   );
 
   // This question is really bastardized. We need custom
-  // checkAnswer() so we overrite the prototype.
+  // checkAnswer() so we overwrite the prototype.
 
   questionFour.checkAnswer = function(answer) {
     console.log('The correctNum var is: ' + this.answer);
