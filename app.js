@@ -3,6 +3,7 @@ var answer;
 var questions;
 var game;
 var currentQuestion;
+var nameQuestion;
 
 //udpates page with text
 var displayOnPage = function(elmId, msg) {
@@ -28,13 +29,8 @@ var onSubmitAnswer = function(event) {
   console.log('The answer from button submit ' + answer);
 
   if (userName === undefined) {
-    //we are just starting. Lets set our user name and build our questions.
     userName = answer;
-
-    questions = generateQuestions();
-    game = new Game(questions);
-
-    initGame(); // start the game
+    initGame(); //start the game
 
     displayOnPage('userName', nameQuestion.checkAnswer(answer));
     document.getElementById('userAnswer').value = ''; //clear the input field
@@ -45,11 +41,18 @@ var onSubmitAnswer = function(event) {
   }
 };
 
+//grabs next question when user selects 'next' button
 var displayNextQuestion = function(event) {
   displayOnPage('question', game.nextQuestion()); //show next question
   game.clearAnswer(); //clear previous answer
   showSubmitButton(); //unhide the submit button
 };
+
+/*
+------------------------------
+    DEFINING OBJECT PROTOTYPES
+------------------------------
+ */
 
 //questions all have the same, repetitive properties. Lets build an object.
 var Question = function(question, answer, correctMsg, incorrectMsg) {
@@ -114,7 +117,6 @@ var generateQuestions = function() {
   );
 
   var questionFour = new Question(
-
     'Try to guess the number. It is between 1 and 10.',
     Math.floor(Math.random() * (10 - 1)) + 1, //took this from MDN -- generates our number
     'Good Job, ' + userName + '! You got it right!',
@@ -123,6 +125,7 @@ var generateQuestions = function() {
 
   // This question is really bastardized. We need custom
   // checkAnswer() so we overrite the prototype.
+
   questionFour.checkAnswer = function(answer) {
     console.log('The correctNum var is: ' + this.answer);
 
@@ -135,31 +138,34 @@ var generateQuestions = function() {
     }
   };
 
+  // return an array that will be used when we create our Game
   return [questionOne, questionTwo, questionThree, questionFour];
 };
 
-//create a question that asks for a name
-var nameQuestion = new Question(
-  'What is your name?',
-  true,
-  'Hi ' + userName + ". Let's play a game.",
-  '' // there is no incorrect answer
-);
+var scriptInit = function() {
+  //create a question that asks for a name
+  nameQuestion = new Question(
+    'What is your name?',
+    true,
+    'Hi ' + userName + ". Let's play a game.",
+    '' // there is no incorrect answer
+  );
 
-//no validation, just show the user's input.
-nameQuestion.checkAnswer = function(answer) {
-  console.log("The user's name is: " + answer);
-  return 'Hi ' + answer + ". Let's play a game.";
-};
+  //no validation, just show the user's input.
+  nameQuestion.checkAnswer = function(answer) {
+    console.log("The user's name is: " + answer);
+    return 'Hi ' + answer + ". Let's play a game.";
+  };
 
-var showNameQuestion = function() {
   // show the name question
   displayOnPage('question', nameQuestion.question);
 };
 
 var initGame = function() {
-  //starts the game.
+  //start the game.
+  questions = generateQuestions();
+  game = new Game(questions);
   displayOnPage('question', game.currentQuestion.question);
 };
 
-showNameQuestion();
+scriptInit();
