@@ -27,16 +27,15 @@ var onSubmitAnswer = function(event) {
   answer = document.getElementById('userAnswer').value;
   console.log('The answer from button submit ' + answer);
 
-  /*
-  if userName is undefined, we must be at the beginning of our game.
-  lets run the getName() function which will set the userName param,
-  build our questions and then start the game.
-  I'm not sure if this is the bet way. It feels really sloppy.
-  */
-
   if (userName === undefined) {
     //we are just starting. Lets set our user name and build our questions.
-    getName(answer);
+    userName = answer;
+
+    questions = generateQuestions();
+    game = new Game(questions);
+
+    initGame(); // start the game
+
     displayOnPage('userName', nameQuestion.checkAnswer(answer));
     document.getElementById('userAnswer').value = ''; //clear the input field
   } else {
@@ -60,8 +59,6 @@ var Question = function(question, answer, correctMsg, incorrectMsg) {
   this.incorrectMsg = incorrectMsg;
 };
 
-//refractor this out to only return the msg object.
-//let the other function call displayOnPage()
 Question.prototype.checkAnswer = function(userAnswer) {
   console.log('The answer is: ' + this.answer);
   if (answer.toLowerCase() === this.answer) {
@@ -118,7 +115,6 @@ var generateQuestions = function() {
 
   var questionFour = new Question(
 
-    // this is a tricky one.
     'Try to guess the number. It is between 1 and 10.',
     Math.floor(Math.random() * (10 - 1)) + 1, //took this from MDN -- generates our number
     'Good Job, ' + userName + '! You got it right!',
@@ -164,20 +160,6 @@ var showNameQuestion = function() {
 var initGame = function() {
   //starts the game.
   displayOnPage('question', game.currentQuestion.question);
-};
-
-var getName = function(name) {
-  //set user name
-  userName = name;
-
-  // now that we have a name, we can build our questions and responses
-  questions = generateQuestions();
-
-  // build our game
-  game = new Game(questions);
-
-  //start our game.
-  initGame();
 };
 
 showNameQuestion();
