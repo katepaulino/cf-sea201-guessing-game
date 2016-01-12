@@ -64,30 +64,37 @@ var min = 1;
 var max = 10;
 correctNum = Math.floor(Math.random() * (max - min)) + min; //took this from MDN
 
-origAnswer = prompt('Try to guess the number. It is between 1 and 10.');
-console.log('The correct number is:' + correctNum);
-console.log('The user guessed: ' + answer);
+// did our user have the correct answer?
+var correctAnswer = false;
 
-//I want to keep the original answer so we can provide feedback to the user.
-convertedAnswer = parseInt(origAnswer);
+while (!correctAnswer) {
 
-if (isNaN(convertedAnswer)) {
-  alert('You did not enter an integer.\nYour input was ' + origAnswer + '.\nBummer.');
-  incorrectCount++;
-} else if (convertedAnswer === correctNum) {
-  alert('Good Job, ' + userName + '! You got it right!');
-  correctCount++;
-} else if (convertedAnswer > correctNum) {
-  alert('Oops! Too high.');
-  incorrectCount++;
-} else {
-  //must be too low.
-  alert('Oops! Too low.');
-  incorrectCount++;
+  var userAnswer = prompt('Try to guess the number. It is between 1 and 10.');
+  console.log('The correct number is:' + correctNum);
+  console.log('The user guessed: ' + answer);
+
+  //I want to keep the original answer so we can provide feedback to the user.
+  convertedAnswer = parseInt(userAnswer);
+
+  if (isNaN(convertedAnswer)) {
+    alert('You did not enter an integer.\nYour input was ' + userAnswer + '.\nBummer.');
+    incorrectCount++;
+  } else if (convertedAnswer === correctNum) {
+    alert('Good Job, ' + userName + '! You got it right!');
+    correctCount++;
+    correctAnswer = true;
+  } else if (convertedAnswer > correctNum) {
+    alert('Oops! Too high. Try again.');
+    incorrectCount++;
+  } else {
+    //must be too low.
+    alert('Oops! Too low. Try again.');
+    incorrectCount++;
+  }
 }
 
 //lets show the uswer how many they got right and wrong.
 
 console.log('The correctCount var is: ' + correctCount);
 console.log('The incorrectCount var is ' + incorrectCount);
-alert('You got ' + correctCount + ' correct and ' + incorrectCount + ' wrong.');
+alert('You made ' + correctCount + ' correct guess(s) and ' + incorrectCount + ' wrong guess(s).');
