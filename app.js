@@ -56,7 +56,7 @@ origAnswer = prompt('Try to guess the number. It is between 1 and 10.');
 console.log('The correct number is:' + correctNum);
 console.log('The user guessed: ' + answer);
 
-//I want to perserve the original answer so we can provide feedback to the user.
+//I want to keep the original answer so we can provide feedback to the user.
 convertedAnswer = parseInt(origAnswer);
 
 if (isNaN(convertedAnswer)) {
