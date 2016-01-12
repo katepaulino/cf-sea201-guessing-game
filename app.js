@@ -72,7 +72,7 @@ while (!correctAnswer) {
 
   var userAnswer = prompt('Try to guess the number. It is between 1 and 10.');
   console.log('The correct number is:' + correctNum);
-  console.log('The user guessed: ' + answer);
+  console.log('The user guessed: ' + userAnswer);
 
   //I want to keep the original answer so we can provide feedback to the user.
   convertedAnswer = parseInt(userAnswer);
