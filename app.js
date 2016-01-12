@@ -1,3 +1,6 @@
+var correctCount = 0;
+var incorrectCount = 0;
+
 // ask for the users name
 var userName = prompt('Enter your name');
 console.log('This is the userName var: ' + userName);
@@ -15,10 +18,13 @@ console.log('The user answered: ' + answer);
 //check answer
 if (answer === 'yes' || answer === 'y') {
   alert('Good Job, ' + userName + '! I did grow up in the area.');
+  correctCount++; //increment the correct counter.
 } else if (answer === 'no' || answer === 'n') {
   alert('I\'m sorry ' + userName + ', but I did indeed grow up in the area.');
+  incorrectCount++;
 } else {
   alert(errorString);
+  incorrectCount++;
 }
 
 //question two
@@ -28,10 +34,13 @@ console.log('The user answered: ' + answer);
 
 if (answer === 'no' || answer === 'n') {
   alert('Good Job, ' + userName + '! I have never visited Africa.');
+  correctCount++;
 } else if (answer === 'yes' || answer === 'y') {
   alert('I\'m sorry ' + userName + ', but I\'ve never visited Africa.');
+  incorrectCount++;
 } else {
   alert(errorString);
+  incorrectCount++;
 }
 
 //question three
@@ -41,10 +50,13 @@ console.log('The user answered: ' + answer);
 
 if (answer === 'yes' || answer === 'y') {
   alert('Good Job, ' + userName + '! I do have a huge German Shepherd / Husky dog.');
+  correctCount++;
 } else if (answer === 'no' || answer === 'n') {
   alert('I\'m sorry ' + userName + ', but I do indeed own a huge German Shepherd / Husky dog.');
+  incorrectCount++;
 } else {
   alert(errorString);
+  incorrectCount++;
 }
 
 //lets ask them to quess a number between 1 and 10
@@ -61,11 +73,21 @@ convertedAnswer = parseInt(origAnswer);
 
 if (isNaN(convertedAnswer)) {
   alert('You did not enter an integer.\nYour input was ' + origAnswer + '.\nBummer.');
+  incorrectCount++;
 } else if (convertedAnswer === correctNum) {
   alert('Good Job, ' + userName + '! You got it right!');
+  correctCount++;
 } else if (convertedAnswer > correctNum) {
   alert('Oops! Too high.');
+  incorrectCount++;
 } else {
   //must be too low.
   alert('Oops! Too low.');
+  incorrectCount++;
 }
+
+//lets show the uswer how many they got right and wrong.
+
+console.log('The correctCount var is: ' + correctCount);
+console.log('The incorrectCount var is ' + incorrectCount);   
+alert('You got ' + correctCount + ' correct and ' + incorrectCount + ' wrong.');
