@@ -67,6 +67,7 @@ correctNum = Math.floor(Math.random() * (max - min)) + min; //took this from MDN
 // did our user have the correct answer?
 var correctAnswer = false;
 
+// we want to keep going until the user guesses the correct answer.
 while (!correctAnswer) {
 
   var userAnswer = prompt('Try to guess the number. It is between 1 and 10.');
