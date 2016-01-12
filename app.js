@@ -89,5 +89,5 @@ if (isNaN(convertedAnswer)) {
 //lets show the uswer how many they got right and wrong.
 
 console.log('The correctCount var is: ' + correctCount);
-console.log('The incorrectCount var is ' + incorrectCount);   
+console.log('The incorrectCount var is ' + incorrectCount);
 alert('You got ' + correctCount + ' correct and ' + incorrectCount + ' wrong.');
