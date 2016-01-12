@@ -1,31 +1,28 @@
-var userName;
-var answer;
-var questions;
+var userName; //TODO -- move this inside of the game object.
 var game;
-var currentQuestion;
 var nameQuestion;
 
 //udpates page with text
-var displayOnPage = function(elmId, msg) {
+function displayOnPage(elmId, msg) {
   document.getElementById(elmId).innerHTML = msg;
-};
+}
 
-var showSubmitButton = function() {
+function showSubmitButton() {
   document.getElementById('userSubmitButton').style.display = 'inline-block';
   document.getElementById('userAnswer').style.display = 'inline-block';
   document.getElementById('nextQuestionButton').style.display = 'none';
-};
+}
 
-var showNextButton = function() {
+function showNextButton() {
   document.getElementById('nextQuestionButton').style.display = 'inline-block';
   document.getElementById('userSubmitButton').style.display = 'none';
   document.getElementById('userAnswer').value = ''; //clear the input field
   document.getElementById('userAnswer').style.display = 'none';
-};
+}
 
 //grabs the users answer and then checks value.
-var onSubmitAnswer = function(event) {
-  answer = document.getElementById('userAnswer').value;
+function onSubmitAnswer(event) {
+  var answer = document.getElementById('userAnswer').value;
   console.log('The answer from button submit ' + answer);
 
   if (userName === undefined) {
@@ -39,14 +36,14 @@ var onSubmitAnswer = function(event) {
     displayOnPage('answer', game.currentQuestion.checkAnswer(answer));
     showNextButton();
   }
-};
+}
 
 //grabs next question when user selects 'next' button
-var displayNextQuestion = function(event) {
+function displayNextQuestion(event) {
   displayOnPage('question', game.nextQuestion()); //show next question
   game.clearAnswer(); //clear previous answer
   showSubmitButton(); //unhide the submit button
-};
+}
 
 /*
 ------------------------------
@@ -55,16 +52,16 @@ var displayNextQuestion = function(event) {
  */
 
 //questions all have the same, repetitive properties. Lets build an object.
-var Question = function(question, answer, correctMsg, incorrectMsg) {
+function Question(question, answer, correctMsg, incorrectMsg) {
   this.question = question;
   this.answer = answer;
   this.correctMsg = correctMsg;
   this.incorrectMsg = incorrectMsg;
-};
+}
 
 Question.prototype.checkAnswer = function(userAnswer) {
   console.log('The answer is: ' + this.answer);
-  if (answer.toLowerCase() === this.answer) {
+  if (userAnswer.toLowerCase() === this.answer) {
     return this.correctMsg;
   } else {
     return this.incorrectMsg;
@@ -72,12 +69,12 @@ Question.prototype.checkAnswer = function(userAnswer) {
 };
 
 //lets make a Game
-var Game = function(questions) {
+function Game(questions) {
   this.questions = questions;
   this.questionIdx = 0;
   this.currentQuestion = questions[0];
   this.questionLength = questions.length;
-};
+}
 
 Game.prototype.nextQuestion = function() {
   if (this.questionIdx < this.questionLength - 1) {
@@ -93,7 +90,7 @@ Game.prototype.clearAnswer = function() {
   displayOnPage('answer', '');
 };
 
-var generateQuestions = function() {
+function generateQuestions() {
   // we want to build our questions, once we have a user.
   var questionOne = new Question(
     'Did I grow up in the Seattle area?',
@@ -129,6 +126,7 @@ var generateQuestions = function() {
   questionFour.checkAnswer = function(answer) {
     console.log('The correctNum var is: ' + this.answer);
 
+    //TODO -- add handling for NaN
     if (parseInt(answer) === this.answer) {
       return this.correctMsg;
     } else if (parseInt(answer) > this.answer) {
@@ -140,9 +138,9 @@ var generateQuestions = function() {
 
   // return an array that will be used when we create our Game
   return [questionOne, questionTwo, questionThree, questionFour];
-};
+}
 
-var scriptInit = function() {
+function scriptInit() {
   //create a question that asks for a name
   nameQuestion = new Question(
     'What is your name?',
@@ -159,13 +157,13 @@ var scriptInit = function() {
 
   // show the name question
   displayOnPage('question', nameQuestion.question);
-};
+}
 
-var initGame = function() {
+function initGame() {
   //start the game.
-  questions = generateQuestions();
+  var questions = generateQuestions();
   game = new Game(questions);
   displayOnPage('question', game.currentQuestion.question);
-};
+}
 
 scriptInit();
