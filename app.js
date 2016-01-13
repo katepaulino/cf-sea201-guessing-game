@@ -61,22 +61,25 @@ function guessRandomNumber() {
       incorrectCount++;
     }
   }
-
 }
-
-//lets start our game
-
-userName = getUserName();
-alert('Hi ' + userName + '! Nice to meet you.');
-
-for (var idx in questions) {
-  game(questions[idx], answers[idx]);
-}
-
-guessRandomNumber();
 
 //lets show the uswer how many they got right and wrong.
+function showStats() {
+  console.log('The correctCount var is: ' + correctCount);
+  console.log('The incorrectCount var is ' + incorrectCount);
+  alert('You made ' + correctCount + ' correct guess(s) and ' + incorrectCount + ' wrong guess(s).');
+}
 
-console.log('The correctCount var is: ' + correctCount);
-console.log('The incorrectCount var is ' + incorrectCount);
-alert('You made ' + correctCount + ' correct guess(s) and ' + incorrectCount + ' wrong guess(s).');
+function runGame() {
+  userName = getUserName();
+  alert('Hi ' + userName + '! Nice to meet you.');
+
+  for (var idx in questions) {
+    game(questions[idx], answers[idx]);
+  }
+
+  guessRandomNumber();
+  showStats();
+}
+
+runGame();
