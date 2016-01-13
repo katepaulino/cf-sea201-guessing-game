@@ -59,6 +59,8 @@ function Question(question, answer, correctMsg, incorrectMsg) {
   this.answer = answer;
   this.correctMsg = correctMsg;
   this.incorrectMsg = incorrectMsg;
+  this.guessedCorrect = false; //udpate this when guessed correctly.
+  this.allowRetry = false; //udpate to true if user can retry
 }
 
 Question.prototype.checkAnswer = function(userAnswer) {
@@ -79,6 +81,11 @@ function Game(questions) {
 }
 
 Game.prototype.nextQuestion = function() {
+
+  //TODO -- add logic that checks for allowsRetry and guessed correct.
+  //if allowsRetry and !guessedCorrect, then the next question should be the
+  //current question.
+
   if (this.questionIdx < this.questionLength - 1) {
     this.questionIdx++;
     this.currentQuestion = this.questions[this.questionIdx];
@@ -122,6 +129,8 @@ function generateQuestions() {
     '' // we will use our new CheckAnswer() to generate this...
   );
 
+  questionFour.allowRetry = true;
+
   // This question is really bastardized. We need custom
   // checkAnswer() so we overwrite the prototype.
 
@@ -133,8 +142,8 @@ function generateQuestions() {
     if (isNaN(convertedAnswer)) {
       return 'You did not enter an integer.\nYour input was ' + answer + '.\nBummer.';
     } else if (convertedAnswer === this.answer) {
+      this.guessedCorrect = true;
       return this.correctMsg;
-      correctAnswer = true;
     } else if (convertedAnswer > this.answer) {
       return 'Oops! Too high. Try again.';
     } else {
