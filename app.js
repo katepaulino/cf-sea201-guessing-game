@@ -1,6 +1,7 @@
-var userName; //TODO -- move this inside of the game object.
+var userName;
 var game;
 var nameQuestion;
+var haveUser = false;
 
 //udpates page with text
 function displayOnPage(elmId, msg) {
@@ -25,9 +26,10 @@ function onSubmitAnswer(event) {
   var answer = document.getElementById('userAnswer').value;
   console.log('The answer from button submit ' + answer);
 
-  if (userName === undefined) {
-    userName = answer;
+  if (!haveUser) {
     initGame(); //start the game
+    haveUser = true; // we have our user
+    userName = answer //set our user name;
 
     displayOnPage('userName', nameQuestion.checkAnswer(answer));
     document.getElementById('userAnswer').value = ''; //clear the input field
