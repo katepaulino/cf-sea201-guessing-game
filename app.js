@@ -5,7 +5,7 @@ var haveUser = false;
 
 //udpates page with text
 function displayOnPage(elmId, msg) {
-  document.getElementById(elmId).innerHTML = msg;
+  document.getElementById(elmId).textContent = msg;
 }
 
 function showSubmitButton() {
