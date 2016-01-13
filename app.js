@@ -82,9 +82,10 @@ function Game(questions) {
 
 Game.prototype.nextQuestion = function() {
 
-  //TODO -- add logic that checks for allowsRetry and guessed correct.
-  //if allowsRetry and !guessedCorrect, then the next question should be the
-  //current question.
+  if (this.currentQuestion.allowRetry && !this.currentQuestion.guessedCorrect) {
+    console.log('Lets Retry!');
+    return this.currentQuestion.question; //return the same question
+  }
 
   if (this.questionIdx < this.questionLength - 1) {
     this.questionIdx++;
