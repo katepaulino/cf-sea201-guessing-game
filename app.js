@@ -27,10 +27,10 @@ function onSubmitAnswer(event) {
   console.log('The answer from button submit ' + answer);
 
   if (!haveUser) {
-    initGame(); //start the game
     haveUser = true; // we have our user
-    userName = answer //set our user name;
+    userName = answer; //set our user name
 
+    initGame(); //start the game
     displayOnPage('userName', nameQuestion.checkAnswer(answer));
     document.getElementById('userAnswer').value = ''; //clear the input field
   } else {
@@ -127,14 +127,19 @@ function generateQuestions() {
 
   questionFour.checkAnswer = function(answer) {
     console.log('The correctNum var is: ' + this.answer);
+    convertedAnswer = parseInt(answer);
 
     //TODO -- add handling for NaN
-    if (parseInt(answer) === this.answer) {
+    if (isNaN(convertedAnswer)) {
+      return 'You did not enter an integer.\nYour input was ' + answer + '.\nBummer.';
+    } else if (convertedAnswer === this.answer) {
       return this.correctMsg;
-    } else if (parseInt(answer) > this.answer) {
-      return 'Oops! Too high.';
+      correctAnswer = true;
+    } else if (convertedAnswer > this.answer) {
+      return 'Oops! Too high. Try again.';
     } else {
-      return 'Oops! Too low.';
+      //must be too low.
+      return 'Oops! Too low. Try again.';
     }
   };
 
