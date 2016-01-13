@@ -66,6 +66,7 @@ function Question(question, answer, correctMsg, incorrectMsg) {
 Question.prototype.checkAnswer = function(userAnswer) {
   console.log('The answer is: ' + this.answer);
   if (userAnswer.toLowerCase() === this.answer) {
+    this.guessedCorrect = true; //they guess correct, yay!
     return this.correctMsg;
   } else {
     return this.incorrectMsg;
@@ -82,6 +83,8 @@ function Game(questions) {
 
 Game.prototype.nextQuestion = function() {
 
+  //if the user hasn't guessed the correct answer and we allow retry
+  //lets return the same question.
   if (this.currentQuestion.allowRetry && !this.currentQuestion.guessedCorrect) {
     console.log('Lets Retry!');
     return this.currentQuestion.question; //return the same question
