@@ -27,13 +27,13 @@ function onSubmitAnswer(event) {
   console.log('The answer from button submit ' + answer);
 
   if (!haveUser) {
-    haveUser = true; // we have our user
-    userName = answer; //set our user name
+    haveUser = true;
+    userName = answer;
 
     initGame(); //start the game
 
     displayOnPage('userName', nameQuestion.checkAnswer(answer));
-    document.getElementById('userAnswer').value = ''; //clear the input field
+    document.getElementById('userAnswer').value = '';
   } else {
     //check the answer and show the 'next' button
     displayOnPage('answer', game.currentQuestion.checkAnswer(answer));
@@ -43,9 +43,9 @@ function onSubmitAnswer(event) {
 
 //grabs next question when user selects 'next' button
 function displayNextQuestion(event) {
-  displayOnPage('question', game.nextQuestion()); //show next question
-  game.clearAnswer(); //clear previous answer
-  showSubmitButton(); //unhide the submit button
+  displayOnPage('question', game.nextQuestion());
+  game.clearAnswer();
+  showSubmitButton();
 }
 
 /*
@@ -66,6 +66,7 @@ function Question(question, answer, correctMsg, incorrectMsg) {
 
 Question.prototype.checkAnswer = function(userAnswer) {
   console.log('The answer is: ' + this.answer);
+
   if (userAnswer.toLowerCase() === this.answer) {
     this.guessedCorrect = true;
     return this.correctMsg;
@@ -88,7 +89,7 @@ Game.prototype.nextQuestion = function() {
   //lets return the same question.
   if (this.currentQuestion.allowRetry && !this.currentQuestion.guessedCorrect) {
     console.log('Lets Retry!');
-    return this.currentQuestion.question; //return the same question
+    return this.currentQuestion.question;
   }
 
   if (this.questionIdx < this.questionLength - 1) {
@@ -135,7 +136,7 @@ function generateQuestions() {
     '' // we will use our new CheckAnswer() to generate the incorrectMsg...
   );
 
-  questionFour.allowRetry = true; //this one will loop
+  questionFour.allowRetry = true;
 
   questionFour.checkAnswer = function(answer) {
     // This question is really bastardized. We need custom
