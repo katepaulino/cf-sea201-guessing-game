@@ -1,6 +1,7 @@
-var userName; //TODO -- move this inside of the game object.
+var userName;
 var game;
 var nameQuestion;
+var haveUser = false;
 
 //udpates page with text
 function displayOnPage(elmId, msg) {
@@ -25,10 +26,11 @@ function onSubmitAnswer(event) {
   var answer = document.getElementById('userAnswer').value;
   console.log('The answer from button submit ' + answer);
 
-  if (userName === undefined) {
-    userName = answer;
-    initGame(); //start the game
+  if (!haveUser) {
+    haveUser = true; // we have our user
+    userName = answer; //set our user name
 
+    initGame(); //start the game
     displayOnPage('userName', nameQuestion.checkAnswer(answer));
     document.getElementById('userAnswer').value = ''; //clear the input field
   } else {
@@ -57,11 +59,14 @@ function Question(question, answer, correctMsg, incorrectMsg) {
   this.answer = answer;
   this.correctMsg = correctMsg;
   this.incorrectMsg = incorrectMsg;
+  this.guessedCorrect = false; //udpate this when guessed correctly.
+  this.allowRetry = false; //udpate to true if user can retry
 }
 
 Question.prototype.checkAnswer = function(userAnswer) {
   console.log('The answer is: ' + this.answer);
   if (userAnswer.toLowerCase() === this.answer) {
+    this.guessedCorrect = true; //they guess correct, yay!
     return this.correctMsg;
   } else {
     return this.incorrectMsg;
@@ -77,6 +82,14 @@ function Game(questions) {
 }
 
 Game.prototype.nextQuestion = function() {
+
+  //if the user hasn't guessed the correct answer and we allow retry
+  //lets return the same question.
+  if (this.currentQuestion.allowRetry && !this.currentQuestion.guessedCorrect) {
+    console.log('Lets Retry!');
+    return this.currentQuestion.question; //return the same question
+  }
+
   if (this.questionIdx < this.questionLength - 1) {
     this.questionIdx++;
     this.currentQuestion = this.questions[this.questionIdx];
@@ -120,19 +133,26 @@ function generateQuestions() {
     '' // we will use our new CheckAnswer() to generate this...
   );
 
+  questionFour.allowRetry = true;
+
   // This question is really bastardized. We need custom
   // checkAnswer() so we overwrite the prototype.
 
   questionFour.checkAnswer = function(answer) {
     console.log('The correctNum var is: ' + this.answer);
+    convertedAnswer = parseInt(answer);
 
     //TODO -- add handling for NaN
-    if (parseInt(answer) === this.answer) {
+    if (isNaN(convertedAnswer)) {
+      return 'You did not enter an integer.\nYour input was ' + answer + '.\nBummer.';
+    } else if (convertedAnswer === this.answer) {
+      this.guessedCorrect = true;
       return this.correctMsg;
-    } else if (parseInt(answer) > this.answer) {
-      return 'Oops! Too high.';
+    } else if (convertedAnswer > this.answer) {
+      return 'Oops! Too high. Try again.';
     } else {
-      return 'Oops! Too low.';
+      //must be too low.
+      return 'Oops! Too low. Try again.';
     }
   };
 
