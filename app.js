@@ -31,6 +31,7 @@ function onSubmitAnswer(event) {
     userName = answer; //set our user name
 
     initGame(); //start the game
+
     displayOnPage('userName', nameQuestion.checkAnswer(answer));
     document.getElementById('userAnswer').value = ''; //clear the input field
   } else {
@@ -66,7 +67,7 @@ function Question(question, answer, correctMsg, incorrectMsg) {
 Question.prototype.checkAnswer = function(userAnswer) {
   console.log('The answer is: ' + this.answer);
   if (userAnswer.toLowerCase() === this.answer) {
-    this.guessedCorrect = true; //they guess correct, yay!
+    this.guessedCorrect = true;
     return this.correctMsg;
   } else {
     return this.incorrectMsg;
@@ -97,6 +98,7 @@ Game.prototype.nextQuestion = function() {
   } else {
     return "Nice work, you're finished.";
   }
+
 };
 
 Game.prototype.clearAnswer = function() {
@@ -107,7 +109,7 @@ function generateQuestions() {
   // we want to build our questions, once we have a user.
   var questionOne = new Question(
     'Did I grow up in the Seattle area?',
-    'yes',
+    'yes', // we could use an array if there is more than one correct answer.
     'Good Job, ' + userName + '! I did grow up in the area.',
     "I'm sorry " + userName + ', but I did indeed grow up in the area.'
   );
@@ -130,19 +132,18 @@ function generateQuestions() {
     'Try to guess the number. It is between 1 and 10.',
     Math.floor(Math.random() * (10 - 1)) + 1, //took this from MDN -- generates our number
     'Good Job, ' + userName + '! You got it right!',
-    '' // we will use our new CheckAnswer() to generate this...
+    '' // we will use our new CheckAnswer() to generate the incorrectMsg...
   );
 
-  questionFour.allowRetry = true;
-
-  // This question is really bastardized. We need custom
-  // checkAnswer() so we overwrite the prototype.
+  questionFour.allowRetry = true; //this one will loop
 
   questionFour.checkAnswer = function(answer) {
+    // This question is really bastardized. We need custom
+    // checkAnswer() so we overwrite the prototype.
+
     console.log('The correctNum var is: ' + this.answer);
     convertedAnswer = parseInt(answer);
 
-    //TODO -- add handling for NaN
     if (isNaN(convertedAnswer)) {
       return 'You did not enter an integer.\nYour input was ' + answer + '.\nBummer.';
     } else if (convertedAnswer === this.answer) {
