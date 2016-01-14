@@ -89,3 +89,5 @@ function runGame() {
 }
 
 runGame();
+
+document.write('<h3>Thanks <a href="https://github.com/meganwalter">Megan</a> for contributing!</h3>');
