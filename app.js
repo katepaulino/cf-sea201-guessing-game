@@ -11,13 +11,15 @@ function updatePage(elId, text) {
   document.getElementById(elId).textContent = text;
 
 }
+
 // ask for the users name
 function getUserName() {
   return prompt('Enter your name');
 }
+
 function userScore() {
-  var score = "You got " + correctCount + " right and " + incorrectCount + " wrong!";
-  updatePage('userScore', score)
+  var score = 'You got ' + correctCount + ' right and ' + incorrectCount + ' wrong!';
+  updatePage('userScore', score);
 }
 
 function game(question, answer) {
@@ -26,11 +28,12 @@ function game(question, answer) {
   updatePage('answer', userAnswer);
   if (userAnswer === answer) {
     correctCount++;
-    updatePage('isCorrect','You rock, ' + userName + '! You got it right.');
+    updatePage('isCorrect', 'You rock, ' + userName + '! You got it right.');
   } else {
     updatePage('isCorrect', 'Bummer, ' + userName + '. You got it wrong');
     incorrectCount++;
   }
+
   userScore();
 }
 
@@ -73,6 +76,7 @@ function guessRandomNumber() {
       updatePage('isCorrect', 'Oops! Too low. Try again.');
       incorrectCount++;
     }
+
     userScore();
   }
 }
