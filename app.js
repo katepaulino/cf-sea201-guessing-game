@@ -7,6 +7,10 @@ var userName;
 // our default errorString
 var errorString = 'I\'m sorry ' + userName + ', but you did not submit an acceptable answer.\nPlease enter either "yes" or "y".';
 
+function updatePage(elId, text) {
+  document.getElementById(elId).textContent = text;
+
+}
 // ask for the users name
 function getUserName() {
   return prompt('Enter your name');
@@ -14,11 +18,13 @@ function getUserName() {
 
 function game(question, answer) {
   var userAnswer = prompt(question).toLowerCase();
+  updatePage('question', question);
+  updatePage('answer', userAnswer);
   if (userAnswer === answer) {
     correctCount++;
-    alert('You rock, ' + userName + '! You got it right.');
+    updatePage('isCorrect','You rock, ' + userName + '! You got it right.');
   } else {
-    alert('Bummer, ' + userName + '. You got it wrong');
+    updatePage('isCorrect', 'Bummer, ' + userName + '. You got it wrong');
     incorrectCount++;
   }
 }
