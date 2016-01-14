@@ -7,20 +7,31 @@ var userName;
 // our default errorString
 var errorString = 'I\'m sorry ' + userName + ', but you did not submit an acceptable answer.\nPlease enter either "yes" or "y".';
 
+function updatePage(elId, text) {
+  document.getElementById(elId).textContent = text;
+
+}
 // ask for the users name
 function getUserName() {
   return prompt('Enter your name');
 }
+function userScore() {
+  var score = "You got " + correctCount + " right and " + incorrectCount + " wrong!";
+  updatePage('userScore', score)
+}
 
 function game(question, answer) {
   var userAnswer = prompt(question).toLowerCase();
+  updatePage('question', question);
+  updatePage('answer', userAnswer);
   if (userAnswer === answer) {
     correctCount++;
-    alert('You rock, ' + userName + '! You got it right.');
+    updatePage('isCorrect','You rock, ' + userName + '! You got it right.');
   } else {
-    alert('Bummer, ' + userName + '. You got it wrong');
+    updatePage('isCorrect', 'Bummer, ' + userName + '. You got it wrong');
     incorrectCount++;
   }
+  userScore();
 }
 
 function randomNumber(min, max) {
@@ -39,35 +50,31 @@ function guessRandomNumber() {
   while (!correctAnswer) {
 
     var userAnswer = prompt('Try to guess the number. It is between 1 and 10.');
-    console.log('The correct number is:' + correctNum);
+    updatePage('question', 'Try to guess the number. It is between 1 and 10.');
+    updatePage('answer', userAnswer);
+    console.log('The correct number is: ' + correctNum);
     console.log('The user guessed: ' + userAnswer);
 
     //I want to keep the original answer so we can provide feedback to the user.
     convertedAnswer = parseInt(userAnswer);
 
     if (isNaN(convertedAnswer)) {
-      alert('You did not enter an integer.\nYour input was ' + userAnswer + '.\nBummer.');
+      updatePage('isCorrect', 'You did not enter an integer.\nYour input was ' + userAnswer + '.\nBummer.');
       incorrectCount++;
     } else if (convertedAnswer === correctNum) {
-      alert('Good Job, ' + userName + '! You got it right!');
+      updatePage('isCorrect', 'Good Job, ' + userName + '! You got it right!');
       correctCount++;
       correctAnswer = true;
     } else if (convertedAnswer > correctNum) {
-      alert('Oops! Too high. Try again.');
+      updatePage('isCorrect', 'Oops! Too high. Try again.');
       incorrectCount++;
     } else {
       //must be too low.
-      alert('Oops! Too low. Try again.');
+      updatePage('isCorrect', 'Oops! Too low. Try again.');
       incorrectCount++;
     }
+    userScore();
   }
-}
-
-//lets show the uswer how many they got right and wrong.
-function showStats() {
-  console.log('The correctCount var is: ' + correctCount);
-  console.log('The incorrectCount var is ' + incorrectCount);
-  alert('You made ' + correctCount + ' correct guess(s) and ' + incorrectCount + ' wrong guess(s).');
 }
 
 function runGame() {
@@ -79,7 +86,8 @@ function runGame() {
   }
 
   guessRandomNumber();
-  showStats();
 }
 
 runGame();
+
+document.write('<h3>Thanks <a href="https://github.com/meganwalter">Megan</a> for contributing!</h3>');
