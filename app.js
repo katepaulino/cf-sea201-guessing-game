@@ -1,7 +1,9 @@
 var correctCount = 0;
 var incorrectCount = 0;
 var questions = ['Did I grow up in Seattle area?', 'Have I ever visited Africa?', 'Do I own an 80lb German Shepherd / Husky dog?'];
-var answers = ['yes', 'no', 'yes'];
+var yesAnswer = ['yes', 'y', 'yea', 'true'];
+var noAnswer  = ['no', 'n', 'nope', 'false'];
+var answers = [yesAnswer, noAnswer, yesAnswer];
 var userName;
 
 // our default errorString
@@ -26,7 +28,7 @@ function game(question, answer) {
   var userAnswer = prompt(question).toLowerCase();
   updatePage('question', question);
   updatePage('answer', userAnswer);
-  if (userAnswer === answer) {
+  if (answer.indexOf(userAnswer) !== -1) {
     correctCount++;
     updatePage('isCorrect', 'You rock, ' + userName + '! You got it right.');
   } else {
@@ -94,4 +96,4 @@ function runGame() {
 
 runGame();
 
-document.write('<h3>Thanks <a href="https://github.com/meganwalter">Megan</a> for contributing!</h3>');
+document.write('<h3 class="contributor">Thanks <a href="https://github.com/meganwalter">Megan</a> for contributing!</h3>');

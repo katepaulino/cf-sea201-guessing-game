@@ -31,3 +31,7 @@ h2, .sub-heading2 {
   /*I found this on a fiddle, but can't remember where. Compensates for the header.*/
   margin: 300px;
 }
+
+.contributor {
+  text-align: center;
+}
