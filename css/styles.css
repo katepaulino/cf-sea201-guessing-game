@@ -14,9 +14,8 @@ h1, .sub-heading {
   color: rgb(245, 245, 245)
 }
 
-h2, .sub-heading2 {
+.sub-heading2 {
   text-align: center;
-
 }
 
 .header {
