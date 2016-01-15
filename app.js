@@ -11,7 +11,6 @@ var errorString = 'I\'m sorry ' + userName + ', but you did not submit an accept
 
 function updatePage(elId, text) {
   document.getElementById(elId).textContent = text;
-
 }
 
 // ask for the users name
@@ -28,6 +27,7 @@ function game(question, answer) {
   var userAnswer = prompt(question).toLowerCase();
   updatePage('question', question);
   updatePage('answer', userAnswer);
+
   if (answer.indexOf(userAnswer) !== -1) {
     correctCount++;
     updatePage('isCorrect', 'You rock, ' + userName + '! You got it right.');
@@ -55,8 +55,10 @@ function guessRandomNumber() {
   while (!correctAnswer) {
 
     var userAnswer = prompt('Try to guess the number. It is between 1 and 10.');
+
     updatePage('question', 'Try to guess the number. It is between 1 and 10.');
     updatePage('answer', userAnswer);
+
     console.log('The correct number is: ' + correctNum);
     console.log('The user guessed: ' + userAnswer);
 
