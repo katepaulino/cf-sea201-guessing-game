@@ -1,6 +1,4 @@
-var userName;
 var game;
-var nameQuestion;
 var haveUser = false;
 
 //udpates page with text
@@ -25,20 +23,17 @@ function showNextButton() {
 function onSubmitAnswer(event) {
   var answer = document.getElementById('userAnswer').value;
   console.log('The answer from button submit ' + answer);
-
   if (!haveUser) {
     haveUser = true;
-    userName = answer;
+    displayOnPage('userName', game.currentQuestion.checkAnswer(answer));
+    displayOnPage('question', '');
+    showNextButton();
 
-    initGame(); //start the game
-
-    displayOnPage('userName', nameQuestion.checkAnswer(answer));
-    document.getElementById('userAnswer').value = '';
   } else {
-    //check the answer and show the 'next' button
     displayOnPage('answer', game.currentQuestion.checkAnswer(answer));
     showNextButton();
   }
+
 }
 
 //grabs next question when user selects 'next' button
@@ -107,33 +102,36 @@ Game.prototype.clearAnswer = function() {
 };
 
 function generateQuestions() {
+  var correctMsg = 'Good job! You got it right!';
+  var incorrectMsg = "I'm sorry, but you got it wrong. Bummer.";
+
   // we want to build our questions, once we have a user.
   var questionOne = new Question(
     'Did I grow up in the Seattle area?',
     'yes', // we could use an array if there is more than one correct answer.
-    'Good Job, ' + userName + '! I did grow up in the area.',
-    "I'm sorry " + userName + ', but I did indeed grow up in the area.'
+    correctMsg,
+    incorrectMsg
   );
 
   var questionTwo = new Question(
     'Have I ever visited Africa?',
     'no',
-    'Good Job, ' + userName + '! I have never visited Africa.',
-    "I'm sorry " + userName + ', but I have never been to Africa.'
+    correctMsg,
+    incorrectMsg
   );
 
   var questionThree = new Question(
     'Do I own an 80lb German Shepherd / Husky dog?',
     'yes',
-    'Good Job, ' + userName + '! I do have a huge German Shepherd / Husky dog.',
-    "I'm sorry " + userName + ', but I do indeed own a huge German Shepherd / Husky dog.'
+    correctMsg,
+    incorrectMsg
   );
 
   var questionFour = new Question(
     'Try to guess the number. It is between 1 and 10.',
     Math.floor(Math.random() * (10 - 1)) + 1, //took this from MDN -- generates our number
-    'Good Job, ' + userName + '! You got it right!',
-    '' // we will use our new CheckAnswer() to generate the incorrectMsg...
+    correctMsg,
+    incorrectMsg
   );
 
   questionFour.allowRetry = true;
@@ -158,17 +156,11 @@ function generateQuestions() {
     }
   };
 
-  // return an array that will be used when we create our Game
-  return [questionOne, questionTwo, questionThree, questionFour];
-}
-
-function scriptInit() {
-  //create a question that asks for a name
-  nameQuestion = new Question(
+  var nameQuestion = new Question(
     'What is your name?',
     true,
-    'Hi ' + userName + ". Let's play a game.",
-    '' // there is no incorrect answer
+    '',
+    ''
   );
 
   //no validation, just show the user's input.
@@ -177,8 +169,8 @@ function scriptInit() {
     return 'Hi ' + answer + ". Let's play a game.";
   };
 
-  // show the name question
-  displayOnPage('question', nameQuestion.question);
+  // return an array that will be used when we create our Game
+  return [nameQuestion, questionOne, questionTwo, questionThree, questionFour];
 }
 
 function initGame() {
@@ -186,6 +178,7 @@ function initGame() {
   var questions = generateQuestions();
   game = new Game(questions);
   displayOnPage('question', game.currentQuestion.question);
+
 }
 
-scriptInit();
+initGame();
