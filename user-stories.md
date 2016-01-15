@@ -13,4 +13,5 @@
 9. As a developer, I want to display a score so my user knows how correct and incorrect guesses they made.
 10. As a developer, I want to remove the input field when the users is complete, so the user experience is not confusing.
 11. As a developer, I want to have the cursor focus on the form field automatically when a new question is loaded, so my user can type without moving the cursor.
-12. As a developer, I want to allow my user to use the `Enter` key to submit their response, so they don't have to use the mouse unless they want to. 
+12. As a developer, I want to allow my user to use the `Enter` key to submit their response, so they don't have to use the mouse unless they want to.
+13. As a developer, I want to make sure that my README is up to date so that any users or contributors know how the program works.
