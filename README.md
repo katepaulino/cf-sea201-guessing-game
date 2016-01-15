@@ -8,6 +8,12 @@ If you are guessing a number, make sure to enter an `Integer`; the game will let
 
 At the end of the game, you will be given feedback on your performance.
 
+## Adding New questions
+Add your question to the end of the `questions` array.
+You must then create an array of acceptable answers and then push that array to the `answers` array.
+
+You can modify the existing `yesAnswer` and `noAnswer` array or create your own.
+
 ## Contributors
 
 [Megan Walter](https//:github.com/meganwalter)
