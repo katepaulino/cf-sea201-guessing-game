@@ -1,5 +1,6 @@
 html, body {
   font-family: sans-serif;
+  text-align: center;
   color: rgb(51, 50, 51);
   margin: 0;
   padding: 0;
@@ -14,6 +15,7 @@ h1, .sub-heading {
   color: rgb(245, 245, 245)
 }
 
+}
 .sub-heading2 {
   text-align: center;
 }
@@ -33,4 +35,10 @@ h1, .sub-heading {
 
 .contributor {
   text-align: center;
+}
+
+img.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
