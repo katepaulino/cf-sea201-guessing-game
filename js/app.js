@@ -94,8 +94,7 @@ function runGame() {
   }
 
   guessRandomNumber();
+  document.write('<h3 class="contributor">Thanks <a href="https://github.com/meganwalter">Megan</a> for contributing!</h3>');
 }
 
 runGame();
-
-document.write('<h3 class="contributor">Thanks <a href="https://github.com/meganwalter">Megan</a> for contributing!</h3>');
